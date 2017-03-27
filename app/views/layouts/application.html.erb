@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ItsFacebook</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+     <p class="notice"><%= notice %></p>
+     <p class="alert"><%= alert %></p>
+
+       <header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <h2><%= link_to "The Rails Blog", "/", id: "logo" %></h2>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", "/" %></li>
+          <% if current_user %>
+            <% user = User.find_by(id: session[:user_id]) %>
+            <li><%= link_to "New Post", "/posts/new" %></li>
+
+            
+             <li>
+                <%= link_to "Profile", user_path(current_user) %>             
+             </li>
+
+              <li>
+                <%= link_to "Log out", "/users/sign_out", method: "delete" %>
+              </li>
+            </ul>
+          </li>
+          <% else %>
+            <li>
+            <%= link_to "Log in", "/users/sign_in" %>
+              </li>
+          <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+    <%= yield %>
+  </body>
+</html>

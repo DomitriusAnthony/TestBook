@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-9">
+    <ul id="conversations-list">
+      <% @conversations.each do |conversation| %>
+        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">User list</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @users.each do |user| %>
+           <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<% if current_user %>
+	<%= @posts.each do |post| %>
+			<ul class="post_list">
+				<li><%= post.body %></li>
+			</ul> 
+
+			
+
+			<% end %>
+
+
+
+			<br>
+			<br>
+			<br>
+
+			<%= link_to 'Edit', edit_user_registration_path %>
+
+			<%= link_to 'Delete Account', registration_path(current_user), data: { confirm: 'Are you sure?' }, :method => :delete  %>
+<% else %>
+		
+		<h1>Sign up now!!!</h1>
+
+
+
+<% end %>

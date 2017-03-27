@@ -1,0 +1,44 @@
+<div class="col-md-4">
+
+
+      <% if current_user %>
+       Hello, <%= current_user.fname %>
+      <% end %>
+
+      <div class="bio-box" style="height: 200px; width: 200px;">
+        <h4>Bio</h4>
+        <%= @user.bio %></textarea>
+      </div>
+
+      <% if session[:user_id] %>
+        <form action="/posts" method="post">
+          <textarea type="text" name="body" id="body"></textarea>
+          <button type="submit">Create Post</button>
+        </form>
+      <% end %>
+
+    </div>
+    
+    <div class="col-md-4">
+
+      <h1 class="profile-name">
+          
+          <%= @user.fname %>'s Feed
+          
+      </h1>
+        <ul class="feed">
+          <% @user.posts.each do |post| %>
+            <li class="profile-feed"><%= post.body %></a>
+            <% end %>
+        </ul>
+
+
+    
+
+    </div>
+
+    <div class="col-md-4">
+      
+      <ul>
+  
+    </div>
