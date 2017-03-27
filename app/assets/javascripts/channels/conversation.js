@@ -1,4 +1,7 @@
 App.conversation = App.cable.subscriptions.create("ConversationChannel", {
+  this.app = {};
+  App.cable = ActionCable.createConsumer();
+
   connected: function() {},
   disconnected: function() {},
   received: function(data) {
