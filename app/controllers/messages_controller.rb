@@ -3,10 +3,19 @@ class MessagesController < ApplicationController
     @conversation = Conversation.includes(:recipient).find(params[:conversation_id])
     @message = @conversation.messages.create(message_params)
 
+    if @message.save
+      ActionCable.server.broadcast 'messages',
+      message: message.content,
+      user: message.user.email
+      head :ok
+    end
+    
     respond_to do |format|
       format.js
     end
   end
+
+
 
   private
 
